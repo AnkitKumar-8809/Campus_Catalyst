@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard | CampusCatalysts</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="dashboard-header">
+    <div class="dashboard-logo">CampusCatalysts</div>
+    <button onclick="logout()" class="logout-btn">Logout</button>
+  </header>
+
+  <main class="dashboard-main">
+    <aside class="dashboard-sidebar">
+      <ul>
+        <li><a href="#" class="active">Overview</a></li>
+        <li><a href="#">Messages</a></li>
+        <li><a href="#">Events</a></li>
+        <li><a href="#">Tasks</a></li>
+        <li><a href="#">Settings</a></li>
+      </ul>
+    </aside>
+
+    <section class="dashboard-content">
+      <h2>Welcome, <span id="userName">User</span> 👋</h2>
+      <p>Email: <span id="userEmail">example@example.com</span></p>
+      <p id="userCreated" style="color: gray;"></p>
+
+      <div class="dashboard-widgets">
+        <div class="widget">📩 New Messages: 0</div>
+        <div class="widget">📅 Upcoming Events: 0</div>
+        <div class="widget">✅ Completed Tasks: 0</div>
+      </div>
+
+      <hr style="margin: 2rem 0;" />
+
+      <h3>🧑‍💼 User Profile</h3>
+      <div class="widget" style="max-width: 400px;">
+        <p><strong>Name:</strong> <span id="userNameProfile"></span></p>
+        <p><strong>Email:</strong> <span id="userEmailProfile"></span></p>
+        <p><strong>Account Created:</strong> <span id="userCreatedProfile"></span></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

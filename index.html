@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CampusCatalysts</title>
+  <script>
+  if (localStorage.getItem('campus_dmode') === 'on') {
+    document.documentElement.classList.add('dark-mode');
+  }
+</script>
+
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="icon" href="/assets/CampusCatalysts LOGO.png">
+</head>
+<body>
+<header class="navbar">
+  <div class="logo">CampusCatalysts</div>
+  <nav class="nav-links" aria-label="Main navigation">
+    <button class="nav-toggle" id="navToggle" aria-label="Open navigation menu">&#9776;</button>
+    <div class="nav-menu" id="navMenu" role="menu">
+      <a href="#" role="menuitem" tabindex="0">Home</a>
+      <a href="#features" role="menuitem" tabindex="0">Features</a>
+      <a href="#testimonials" role="menuitem" tabindex="0">Testimonials</a>
+      <a href="#team" role="menuitem" tabindex="0">Team</a>
+      <a href="#contact" role="menuitem" tabindex="0">Contact</a>
+
+      <button class="btn" id="openAuthBtn" style="margin:18px;">Login/Register</button>
+      <button id="modeToggle" aria-label="Toggle dark mode" class="mode-toggle" type="button">🌙</button>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Empowering Students, One Campus at a Time</h1>
+  <p>A smart platform for collaboration, resources, and student community management.</p>
+  <a href="#features" class="btn">Explore Features</a>
+</section>
+
+<section class="features" id="features">
+  <h2>Key Features</h2>
+  <div class="feature-cards">
+    <div class="card animate-on-scroll">
+      <h3>Collaboration Matchmaking</h3>
+      <p>Find teammates for projects or events based on skills and interests.</p>
+    </div>
+    <div class="card animate-on-scroll">
+      <h3>Study Resource Pool</h3>
+      <p>Share and access semester-wise notes, quizzes, and vote on quality.</p>
+    </div>
+    <div class="card animate-on-scroll">
+      <h3>Announcement Board</h3>
+      <p>Get updates from clubs, deadlines, and campus news in one place.</p>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials" id="testimonials">
+  <h2>What Students Say</h2>
+  <div class="testimonials-cards">
+    <div class="testimonial-card animate-on-scroll">
+      <p>“This made finding project mates so easy!”</p>
+      <div class="testimonial-profile">
+        <img src="https://randomuser.me/api/portraits/men/60.jpg" alt="Student 1">
+        <span>Sidharth, 3rd year CSE</span>
+      </div>
+    </div>
+    <div class="testimonial-card animate-on-scroll">
+      <p>“Centralizing all resources & events - genius!”</p>
+      <div class="testimonial-profile">
+        <img src="https://randomuser.me/api/portraits/women/50.jpg" alt="Student 2">
+        <span>Pooja, 2nd year ECE</span>
+      </div>
+    </div>
+    <div class="testimonial-card animate-on-scroll">
+      <p>“Announcements & club updates kept me in the loop.”</p>
+      <div class="testimonial-profile">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Student 3">
+        <span>Abhishek, 3rd year CSE</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="team" id="team">
+  <h2>Meet The Team</h2>
+  <div class="team-cards">
+    <div class="team-card animate-on-scroll">
+      <img src="/assets/PraffulRaj Img.jpg" alt="Prafful Raj">
+      <h4>Prafful Raj</h4>
+      <p>Frontend Developer</p>
+      <div class="socials">
+        <a href="https://github.com/PraffulRajj" target="_blank"><span>GitHub</span></a>
+      </div>
+    </div>
+    <div class="team-card animate-on-scroll">
+      <img src="https://randomuser.me/api/portraits/women/80.jpg" alt="Akshita Tiwari">
+      <h4>Akshita Tiwari</h4>
+      <p>UI/UX Designer</p>
+    </div>
+    <div class="team-card animate-on-scroll">
+      <img src="/assets/Ankit Img.jpg" alt="Ankit Kumar">
+      <h4>Ankit Kumar</h4>
+      <p>Backend & Firebase</p>
+      <div class="socials">
+        <a href="https://github.com/AnkitKumar-8809" target="_blank"><span>GitHub</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <h2>Contact Us</h2>
+  <form class="contact-form" autocomplete="off" novalidate>
+    <div class="form-row">
+      <input type="text" name="name" id="name" placeholder="Your Name" required />
+      <input type="email" name="email" id="email" placeholder="Your Email" required />
+    </div>
+    <textarea name="message" id="message" rows="4" placeholder="Your Message" required></textarea>
+    <button type="submit" class="btn">Send Message</button>
+    <p class="form-status" id="formStatus"></p>
+  </form>
+</section>
+
+<footer class="footer">
+  <p>© 2025 CampusCatalysts. Built by students for students.</p>
+</footer>
+
+<!-- === AUTH MODAL === -->
+<div id="authModal" class="auth-modal hide">
+  <div class="auth-modal-bg" id="closeAuth"></div>
+  <div class="auth-popup-card">
+    <span class="close-btn" id="closeBtn">&times;</span>
+
+    <!-- LOGIN FORM -->
+    <div id="loginBox">
+      <h2>Login</h2>
+      <form id="loginForm" autocomplete="off">
+        <input type="email" id="loginEmail" placeholder="Email" required>
+        <input type="password" id="loginPassword" placeholder="Password" required>
+        <button class="btn" type="submit">Log In</button>
+        <p class="auth-alt">Don’t have an account?
+          <a href="#" id="gotoRegister">Register</a>
+        </p>
+        <p class="form-status" id="loginStatus"></p>
+      </form>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div id="registerBox" class="hide">
+      <h2>Register</h2>
+      <form id="registerForm" autocomplete="off">
+        <input type="text" id="regName" placeholder="Full Name" required>
+        <input type="email" id="regEmail" placeholder="Email" required>
+        <input type="password" id="regPassword" placeholder="Password" required>
+
+        <!-- Password Strength Meter -->
+        <div id="passwordMeterContainer" style="margin: 5px 0;">
+          <div id="passwordMeterBar" style="height: 6px; background: #ddd; border-radius: 4px; overflow: hidden;">
+            <div id="passwordMeterFill" style="width: 0%; height: 100%; background: red; transition: width 0.3s;"></div>
+          </div>
+          <small id="passwordStrength" style="color: gray;"></small>
+        </div>
+
+        <button class="btn" type="submit">Sign Up</button>
+        <p class="auth-alt">Already registered?
+          <a href="#" id="gotoLogin">Log In</a>
+        </p>
+        <p class="form-status" id="registerStatus"></p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
