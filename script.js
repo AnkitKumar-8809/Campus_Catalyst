@@ -10,9 +10,6 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   });
 });
 
-
-
-
 // === Mobile Navigation ===
 const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
