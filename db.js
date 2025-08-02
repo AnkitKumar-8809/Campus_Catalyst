@@ -1,21 +1,13 @@
-const mysql = require('mysql2');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
-// Create a MySQL connection pool
-const db = mysql.createPool({
-  host: 'localhost',
-  user: 'root',         // ✅ Your MySQL username
-  password: 'root', // ✅ Your MySQL password
-  database: 'campuscatalysts' // ✅ Your MySQL DB name
-});
-
-// Optional: Test DB connection on startup
-db.getConnection((err, connection) => {
-  if (err) {
-    console.error('❌ Database connection failed:', err.message);
-  } else {
-    console.log('✅ Connected to the MySQL database');
-    connection.release();
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log('✅ MongoDB Connected');
+  } catch (error) {
+    console.error('❌ MongoDB connection failed:', error.message);
   }
-});
+};
 
-module.exports = db;
+module.exports = connectDB;

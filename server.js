@@ -1,18 +1,21 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const db = require('./db');
+const connectDB = require('./db'); // MongoDB connection
+const User = require('./models/User'); // Mongoose User model
+const Contact = require('./models/Contact'); // ⬅ Contact model
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// === Email format validation ===
+connectDB(); // connect to MongoDB
+
 const isValidEmail = (email) =>
   /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
 // === REGISTER ===
-app.post('/register', (req, res) => {
+app.post('/register', async (req, res) => {
   const { name, email, password } = req.body;
 
   if (!name || !email || !password) {
@@ -23,55 +26,60 @@ app.post('/register', (req, res) => {
     return res.status(400).json({ message: 'Invalid email format' });
   }
 
-  const checkUser = 'SELECT * FROM users WHERE email = ?';
-  db.query(checkUser, [email], (err, result) => {
-    if (err) return res.status(500).json({ message: 'Database error' });
-    if (result.length > 0) {
+  try {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
       return res.status(409).json({ message: 'Email already registered' });
     }
 
-    const insertUser = 'INSERT INTO users (name, email, password) VALUES (?, ?, ?)';
-    db.query(insertUser, [name, email, password], (err) => {
-      if (err) return res.status(500).json({ message: 'Registration failed' });
-      res.status(201).json({ message: 'User registered successfully' });
-    });
-  });
+    const newUser = new User({ name, email, password });
+    await newUser.save();
+    res.status(201).json({ message: 'User registered successfully' });
+  } catch (err) {
+    res.status(500).json({ message: 'Registration failed' });
+  }
 });
 
 // === LOGIN ===
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
     return res.status(400).json({ message: 'Both email and password are required' });
   }
 
-  const loginQuery = 'SELECT * FROM users WHERE email = ? AND password = ?';
-  db.query(loginQuery, [email, password], (err, result) => {
-    if (err) return res.status(500).json({ message: 'Login failed' });
-
-    if (result.length === 0) {
+  try {
+    const user = await User.findOne({ email, password });
+    if (!user) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
 
-    const user = result[0];
     res.status(200).json({
       message: 'Login successful',
       name: user.name,
       email: user.email,
-      created_at: user.created_at || null  // Optional: if your DB table has `created_at`
+      created_at: user.createdAt
     });
-  });
+  } catch (err) {
+    res.status(500).json({ message: 'Login failed' });
+  }
 });
 
-// === Contact Form ===
-app.post('/contact', (req, res) => {
+// === CONTACT ===
+app.post('/contact', async (req, res) => {
   const { name, email, message } = req.body;
+
   if (!name || !email || !message) {
-    return res.status(400).json({ message: 'All fields required' });
+    return res.status(400).json({ message: 'All fields are required' });
   }
-  console.log('📨 Contact form submitted:', name, email, message);
-  res.status(200).json({ message: 'Message received. Thank you!' });
+
+  try {
+    const newContact = new Contact({ name, email, message });
+    await newContact.save();
+    res.status(201).json({ message: 'Message received. Thank you!' });
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to save message' });
+  }
 });
 
 // === Start Server ===

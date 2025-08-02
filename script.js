@@ -11,6 +11,8 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 });
 
 
+
+
 // === Mobile Navigation ===
 const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
@@ -319,4 +321,4 @@ window.addEventListener("DOMContentLoaded", () => {
 function logout() {
   localStorage.removeItem('user');
   window.location.href = 'index.html';
-}
+} 
