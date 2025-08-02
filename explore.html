@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Explore | Campus Catalyst</title>
+  <link rel="stylesheet" href="explore.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <a href="#">Campus Catalyst</a>
+    </div>
+    <div class="nav-toggle" id="nav-toggle">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="nav-links" id="nav-links">
+      <a href="#events">Events</a>
+      <a href="#features">Why Us</a>
+      <a href="#footer">Contact</a>
+      <button class="theme-toggle" id="theme-toggle">🌙</button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" style="background-image: url('assets/arian-darvishi-wh-RPfR_3_M-unsplash.jpg');">
+    <div class="hero-text" data-aos="fade-in">
+      <h1 id="typing-text"></h1>
+      <p>Join hackathons, build teams, and compete in innovative campus events.</p>
+      <a href="#events" class="hero-btn">Join Now</a>
+    </div>
+  </section>
+
+  <!-- Events Section -->
+  <section id="events" class="events-section" data-aos="fade-up">
+    <h2>🚀 Featured Events</h2>
+    <div class="events-grid">
+      <div class="event-card" data-aos="zoom-in">
+        <img src="assets/eagan-hsu-g3ApKp56jiw-unsplash.jpg" alt="HackForFuture">
+        <h3>HackForFuture 2025</h3>
+        <p>Aug 10 – Aug 12 • Remote</p>
+        <a class="btn" href="#">Details</a>
+      </div>
+      <div class="event-card" data-aos="zoom-in">
+        <img src="assets/mika-baumeister-dMNee_epAnw-unsplash.jpg" alt="Campus CodeJam">
+        <h3>Campus CodeJam</h3>
+        <p>Sept 1 – Sept 3 • In-Person</p>
+        <a class="btn" href="#">Details</a>
+      </div>
+      <div class="event-card" data-aos="zoom-in">
+        <img src="assets/saxon-white-Hzv4tjluZbI-unsplash.jpg" alt="Amity Hackathon">
+        <h3>Amity Hackathon</h3>
+        <p>Aug 6 – Aug 8 • In-Person</p>
+        <a class="btn" href="#">Details</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features-section" data-aos="fade-up">
+    <h2>💡 Why Choose Campus Catalyst?</h2>
+    <div class="features-grid">
+      <div class="feature" data-aos="fade-up">
+        <h4>🤝 Team Collaboration</h4>
+        <p>Find teammates with shared interests for projects or events.</p>
+      </div>
+      <div class="feature" data-aos="fade-up" data-aos-delay="100">
+        <h4>📚 Resource Sharing</h4>
+        <p>Access and share quality notes, quizzes, and campus resources.</p>
+      </div>
+      <div class="feature" data-aos="fade-up" data-aos-delay="200">
+        <h4>📅 Campus Events</h4>
+        <p>Stay updated on club announcements, deadlines, and workshops.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sponsor Logos -->
+  <section class="sponsors" data-aos="fade-left">
+    <div class="marquee">
+      <div class="track">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="Uber" />
+        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" />
+        <img src="https://www.uipath.com/hubfs/UiPath_Logos/UiPath_FullLogo_Red_RGB.png" alt="UiPath" />
+        <img src="https://logos-world.net/wp-content/uploads/2020/04/Microsoft-Logo.png" alt="Microsoft" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Adobe_Corporate_Logo.png/800px-Adobe_Corporate_Logo.png" alt="Adobe" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/MetLife_logo.svg/2560px-MetLife_logo.svg.png" alt="MetLife" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.png" alt="Google Cloud" />
+        <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_92x30dp.png" alt="Google" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <p>© 2025 Campus Catalyst. Built by students, for students.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+    const text = "Challenge Yourself with Campus Hackathons";
+    let i = 0;
+    function typeWriter() {
+      if (i < text.length) {
+        document.getElementById("typing-text").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 60);
+      }
+    }
+    window.onload = typeWriter;
+
+    document.getElementById('nav-toggle').onclick = function () {
+      document.getElementById('nav-links').classList.toggle('show');
+    };
+
+    const themeToggle = document.getElementById("theme-toggle");
+    themeToggle.onclick = () => {
+      document.body.classList.toggle("dark");
+      themeToggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+    };
+  </script>
+
+</body>
+</html>
