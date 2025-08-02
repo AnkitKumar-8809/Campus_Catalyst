@@ -315,10 +315,3 @@ window.addEventListener("DOMContentLoaded", () => {
   if (nameSpan && user) nameSpan.textContent = user.name || '';
   if (emailSpan && user) emailSpan.textContent = user.email || '';
 });
-
-
-// === Logout Handler (call via onclick="logout()" or via event) ===
-function logout() {
-  localStorage.removeItem('user');
-  window.location.href = 'index.html';
-} 

@@ -1,0 +1,158 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: #f5f6fa;
+  color: #2f3640;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2e86de;
+  color: white;
+  padding: 1rem 2rem;
+}
+
+.dashboard-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logout-btn {
+  background-color: #e74c3c;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #c0392b;
+}
+
+/* ===== Main Layout ===== */
+.dashboard-main {
+  display: flex;
+  min-height: calc(100vh - 60px);
+}
+
+/* ===== Sidebar ===== */
+.dashboard-sidebar {
+  width: 220px;
+  background-color: #dcdde1;
+  padding: 2rem 1rem;
+  border-right: 1px solid #ccc;
+}
+
+.dashboard-sidebar ul {
+  list-style: none;
+}
+
+.dashboard-sidebar li {
+  margin: 1rem 0;
+}
+
+.dashboard-sidebar a {
+  text-decoration: none;
+  color: #2f3640;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.dashboard-sidebar a:hover,
+.dashboard-sidebar a.active {
+  color: #2e86de;
+}
+
+/* ===== Content Area ===== */
+.dashboard-content {
+  flex: 1;
+  padding: 2rem;
+}
+
+.dashboard-content h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-widgets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.widget {
+  flex: 1 1 200px;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* ===== Dark Mode ===== */
+body.dark-mode {
+  background-color: #1e272e;
+  color: #dcdde1;
+}
+
+body.dark-mode .dashboard-header {
+  background-color: #485460;
+}
+
+body.dark-mode .dashboard-sidebar {
+  background-color: #2f3640;
+}
+
+body.dark-mode .dashboard-sidebar a {
+  color: #dcdde1;
+}
+
+body.dark-mode .dashboard-sidebar a.active {
+  color: #00a8ff;
+}
+
+body.dark-mode .dashboard-content {
+  background-color: #1e272e;
+}
+
+body.dark-mode .widget {
+  background-color: #2f3640;
+  color: #f5f6fa;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+  .dashboard-main {
+    flex-direction: column;
+  }
+
+  .dashboard-sidebar {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .dashboard-content {
+    padding: 1rem;
+  }
+
+  .dashboard-widgets {
+    flex-direction: column;
+  }
+}
