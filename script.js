@@ -146,7 +146,7 @@ if(contactForm && contactStatus) {
       return;
     }
     try {
-      const res = await fetch('http://localhost:5000/contact', {
+      const res = await fetch('https://campus-catalyst.onrender.com/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, message })
@@ -179,7 +179,7 @@ if (loginForm) {
       return;
     }
     try {
-      const res = await fetch('http://localhost:5000/login', {
+      const res = await fetch('https://campus-catalyst.onrender.com/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -220,7 +220,7 @@ if (registerForm) {
       return;
     }
     try {
-      const res = await fetch('http://localhost:5000/register', {
+      const res = await fetch('https://campus-catalyst.onrender.com/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password })
