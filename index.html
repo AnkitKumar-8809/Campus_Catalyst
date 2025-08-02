@@ -8,11 +8,12 @@
   if (localStorage.getItem('campus_dmode') === 'on') {
     document.documentElement.classList.add('dark-mode');
   }
-</script>
-
+  </script>
   <link rel="stylesheet" href="style.css"/>
   <link rel="icon" href="/assets/CampusCatalysts LOGO.png">
+
 </head>
+  
 <body>
 <header class="navbar">
   <div class="logo">CampusCatalysts</div>
@@ -130,7 +131,7 @@
 <!-- === AUTH MODAL === -->
 <div id="authModal" class="auth-modal hide">
   <div class="auth-modal-bg" id="closeAuth"></div>
-  <div class="auth-popup-card">
+<div class="auth-popup-card">
     <span class="close-btn" id="closeBtn">&times;</span>
 
     <!-- LOGIN FORM -->
@@ -169,8 +170,8 @@
         </p>
         <p class="form-status" id="registerStatus"></p>
       </form>
-    </div>
   </div>
+</div>
 </div>
 
 <script src="script.js"></script>
