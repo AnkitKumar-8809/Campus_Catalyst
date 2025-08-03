@@ -277,6 +277,77 @@ function logout() {
     e.target.reset();
   });
 
+  const userEmail = localStorage.getItem('email'); // Use session/email storage
+
+async function loadDashboard() {
+  try {
+    const res = await fetch(`/api/dashboard/${userEmail}`);
+    const data = await res.json();
+
+    document.getElementById('about-text').innerText = data.about;
+    populateSkills(data.skills);
+    populateProjects(data.projects);
+    populateExperience(data.experience);
+  } catch (err) {
+    console.error('Error loading dashboard:', err);
+  }
+}
+
+function populateSkills(skills) {
+  const container = document.getElementById('skills-container');
+  container.innerHTML = '';
+  skills.forEach(skill => {
+    const div = document.createElement('div');
+    div.innerText = skill;
+    container.appendChild(div);
+  });
+}
+
+function populateProjects(projects) {
+  const container = document.getElementById('projects-container');
+  container.innerHTML = '';
+  projects.forEach(p => {
+    const div = document.createElement('div');
+    div.innerText = `${p.name}: ${p.description}`;
+    container.appendChild(div);
+  });
+}
+
+function populateExperience(expList) {
+  const container = document.getElementById('experience-container');
+  container.innerHTML = '';
+  expList.forEach(e => {
+    const div = document.createElement('div');
+    div.innerText = `${e.role} at ${e.company} (${e.duration})`;
+    container.appendChild(div);
+  });
+}
+
+async function saveDashboard() {
+  const about = document.getElementById('about-text').innerText;
+
+  // You can adjust how you extract these from your inputs
+  const skills = [...document.querySelectorAll('.skill-input')].map(el => el.value);
+  const projects = []; // Collect from project inputs
+  const experience = []; // Collect from experience inputs
+
+  try {
+    const res = await fetch(`/api/dashboard/${userEmail}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ about, skills, projects, experience })
+    });
+
+    const data = await res.json();
+    alert("Dashboard saved!");
+  } catch (err) {
+    console.error('Error saving dashboard:', err);
+  }
+}
+
+// Call on load
+window.onload = loadDashboard;
+
   // ==== Push Event ====
   document.getElementById('share-event-form').addEventListener('submit', function(e) {
     e.preventDefault();

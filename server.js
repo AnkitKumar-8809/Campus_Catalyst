@@ -82,6 +82,48 @@ app.post('/contact', async (req, res) => {
   }
 });
 
+const express = require('express');
+const User = require('./models/User');
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+
+// GET user dashboard data
+app.get('/api/dashboard/:email', async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.params.email });
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    res.json({
+      about: user.about || '',
+      skills: user.skills || [],
+      projects: user.projects || [],
+      experience: user.experience || []
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST user dashboard data
+app.post('/api/dashboard/:email', async (req, res) => {
+  try {
+    const updated = await User.findOneAndUpdate(
+      { email: req.params.email },
+      {
+        about: req.body.about || '',
+        skills: req.body.skills || [],
+        projects: req.body.projects || [],
+        experience: req.body.experience || []
+      },
+      { new: true, upsert: true }
+    );
+    res.json({ message: 'Profile updated successfully', data: updated });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // === Start Server ===
 const PORT = 5000;
 app.listen(PORT, () => {
