@@ -78,8 +78,10 @@ This project is licensed under the [MIT License](LICENSE).
 ## 📬 Contact
 
 For queries, suggestions or contributions, please reach out to the maintainer:  
-**Ankit Kumar** & **Prafful Raj**
+**Ankit Kumar**
 [GitHub Profile](https://github.com/AnkitKumar-8809)
+<br>
+**Prafful Raj**
 [GitHub Profile](https://github.com/PraffulRajj)
 
 ---
