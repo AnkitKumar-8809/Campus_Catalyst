@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile View | CampusCatalysts</title>
+  <link rel="stylesheet" href="profile-view.css" />
+</head>
+<body>
+  <header class="dashboard-header">
+    <div class="dashboard-logo">CampusCatalysts Profile View</div>
+    <button onclick="window.history.back()" class="back-btn">Back</button>
+  </header>
+
+  <main class="dashboard-main">
+    <section class="dashboard-content">
+      <div class="student-hero">
+        <h1>Student Profile</h1>
+        <div class="welcome-meta">
+          <span class="user-info"><strong>Name:</strong> <span id="userName"></span></span>
+          <span class="user-info"><strong>Email:</strong> <span id="userEmail"></span></span>
+        </div>
+      </div>
+
+      <div class="dashboard-sections">
+        <section class="section" id="aboutSection">
+          <h2>About</h2>
+          <div id="aboutDisplay"></div>
+        </section>
+        <section class="section" id="skillsSection">
+          <h2>Skills</h2>
+          <ul id="skillsList" class="dashboard-list"></ul>
+        </section>
+        <section class="section" id="projectsSection">
+          <h2>Projects</h2>
+          <ul id="projectsList" class="dashboard-list"></ul>
+        </section>
+        <section class="section" id="experienceSection">
+          <h2>Experience</h2>
+          <ul id="experienceList" class="dashboard-list"></ul>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="profile-view.js"></script>
+</body>
+</html>

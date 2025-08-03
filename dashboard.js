@@ -1,8 +1,9 @@
-// === Logout Handler (call via onclick="logout()" or via event) ===
+// Logout Handler
 function logout() {
   localStorage.removeItem('user');
   window.location.href = 'index.html';
 }
+
 (function() {
   // Utility
   const $ = id => document.getElementById(id);
@@ -20,7 +21,6 @@ function logout() {
     localStorage.setItem('_theme', dark ? 'dark' : 'light');
   }
   $('themeSwitch').onclick = () => setTheme(!document.body.classList.contains('dark'));
-  // Auto-init theme
   setTheme(localStorage.getItem('_theme') === 'dark');
 
   //--- LOCAL STORAGE FOR PERSISTENCE ---
@@ -51,7 +51,8 @@ function logout() {
     } else {
       $('aboutForm').style.display = 'none';
       $('aboutDisplay').style.display = '';
-      $('aboutDisplay').innerHTML = state.about ? `<span>${state.about.replace(/\n/g,'<br>')}</span> <button class="edit-btn" title="Edit about">Edit</button>`
+      $('aboutDisplay').innerHTML = state.about
+        ? `<span>${state.about.replace(/\n/g,'<br>')}</span> <button class="edit-btn" title="Edit about">Edit</button>`
         : `<span style="color:#a3a3b7;">No info yet.</span> <button class="edit-btn" title="Add about">Add</button>`;
       const btn = $('aboutDisplay').querySelector('.edit-btn');
       if (btn) btn.onclick = () => { isAboutEditing = true; renderAbout(); };
@@ -81,7 +82,6 @@ function logout() {
              <button class="save-btn" title="Save">✔</button>
              <button class="cancel-btn" title="Cancel">✖</button>
            </div>`;
-        // save/cancel actions
         li.querySelector('.save-btn').onclick = () => {
           let val = $(`skillEdit${idx}`).value.trim();
           if (val) { state.skills[idx] = {value:val}; saveState(); renderSkills(); }
@@ -126,7 +126,6 @@ function logout() {
             <button class="save-btn" title="Save">✔</button>
             <button class="cancel-btn" title="Cancel">✖</button>
           </div>`;
-        // save/cancel
         li.querySelector('.save-btn').onclick = () => {
           let name = $(`prjNameEdit${idx}`).value.trim();
           let desc = $(`prjDescEdit${idx}`).value.trim();
@@ -210,4 +209,90 @@ function logout() {
     }
   };
   renderExperiences();
+
+  // ==== Share Tab Switching (Always Only 1 Form Visible) ====
+  const shareTabs = document.querySelectorAll('.share-tab-btn');
+  const shareContents = document.querySelectorAll('.share-tab-content');
+  shareTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      shareTabs.forEach(t => t.classList.remove('active'));
+      shareContents.forEach(c => c.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(`share-${tab.dataset.tab}`).classList.add('active');
+    });
+  });
+
+  // ==== Push Note (with File Upload) ====
+  document.getElementById('share-note-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const files = document.getElementById('share-note-file').files;
+    let attachments = [];
+    if (files.length) {
+      for (let file of files) {
+        if(file.size > 8*1024*1024) {
+          alert('File ' + file.name + ' is too large (max 8MB).');
+          continue;
+        }
+        let base64 = await new Promise((resolve) => {
+          let reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.readAsDataURL(file);
+        });
+        attachments.push({
+          filename: file.name,
+          type: file.type,
+          data: base64
+        });
+      }
+    }
+    const notes = JSON.parse(localStorage.getItem('global-notes') || '[]');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    notes.push({
+      title: document.getElementById('share-note-title').value,
+      content: document.getElementById('share-note-content').value,
+      poster: user.name || 'Anonymous',
+      posterEmail: user.email || '',
+      attachments: attachments
+    });
+    localStorage.setItem('global-notes', JSON.stringify(notes));
+    alert('Note pushed to global community!');
+    e.target.reset();
+    document.getElementById('share-note-file').value = '';
+  });
+
+  // ==== Push Teammate (Looking for Teammates) ====
+  document.getElementById('share-teammate-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const teammates = JSON.parse(localStorage.getItem('global-teammates') || '[]');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    teammates.push({
+      project: document.getElementById('share-teammate-project').value,
+      skills: document.getElementById('share-teammate-skills').value,
+      contact: document.getElementById('share-teammate-contact').value,
+      poster: user.name || 'Anonymous',
+      posterEmail: user.email || ''
+    });
+    localStorage.setItem('global-teammates', JSON.stringify(teammates));
+    alert('Teammate request pushed!');
+    e.target.reset();
+  });
+
+  // ==== Push Event ====
+  document.getElementById('share-event-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const events = JSON.parse(localStorage.getItem('global-events') || '[]');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    events.push({
+      title: document.getElementById('share-event-title').value,
+      date: document.getElementById('share-event-date').value,
+      location: document.getElementById('share-event-location').value,
+      desc: document.getElementById('share-event-desc').value,
+      poster: user.name || 'Anonymous',
+      posterEmail: user.email || ''
+    });
+    localStorage.setItem('global-events', JSON.stringify(events));
+    alert('Event pushed!');
+    e.target.reset();
+  });
+
 })();

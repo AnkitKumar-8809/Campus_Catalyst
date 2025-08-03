@@ -1,3 +1,5 @@
+/* Your existing CSS remains here (I've integrated the new styles below) */
+
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
@@ -17,10 +19,16 @@ body {
 }
 
 .navbar .logo a {
-  font-weight: bold;
-  font-size: 1.2rem;
   text-decoration: none;
-  color: #9b2c2c;
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: .03em;
+}
+
+.home {
+  font-size: larger;
+  font-weight: 500;
+  background-color: rgb(22, 169, 22);
 }
 
 .nav-links {
@@ -174,10 +182,16 @@ body {
 
 .feature {
   background: white;
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: 8px;
   max-width: 280px;
+  min-width: 240px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.feature:hover {
+  transform: translateY(-5px);
 }
 
 /* Sponsors */
@@ -215,6 +229,7 @@ footer {
   text-align: center;
   padding: 1.5rem;
 }
+
 /* Global Light Theme */
 body {
   background: #ffffff;
@@ -257,7 +272,6 @@ body.dark .btn {
   color: #000000;
 }
 
-/* Dark Theme */
 body.dark {
   background: #111;
   color: #eee;
@@ -279,30 +293,292 @@ body.dark .feature {
 body.dark footer {
   background: #000;
 }
-.features-section {
+
+/* NEW: Global Community Section Styles */
+.global-section {
   padding: 4rem 2rem;
-  background: #f6f8ff;
   text-align: center;
+  background: linear-gradient(to bottom, #f6f8ff, #ffffff);
+  border-top: 1px solid #e0e5f2;
 }
 
-.features-grid {
+body.dark .global-section {
+  background: linear-gradient(to bottom, #121212, #0f0f0f);
+  border-top: 1px solid #2a314a;
+}
+
+.global-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: #2563eb;
+}
+
+body.dark .global-section h2 {
+  color: #4d8aff;
+}
+
+.global-section p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: #666;
+}
+
+body.dark .global-section p {
+  color: #bbb;
+}
+
+.global-tabs {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
-  margin-top: 2rem;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
-.feature {
-  background: white;
-  padding: 1.5rem;
+.tab-btn {
+  background: #e6eeff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.tab-btn.active {
+  background: #2563eb;
+  color: #fff;
+}
+
+body.dark .tab-btn {
+  background: #263770;
+  color: #ddd;
+}
+
+body.dark .tab-btn.active {
+  background: #4d8aff;
+  color: #fff;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.global-form {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-group {
+  position: relative;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ccc;
   border-radius: 8px;
-  max-width: 280px;
-  min-width: 240px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  transition: transform 0.2s ease;
+  font-size: 1rem;
+  transition: border 0.3s;
 }
 
-.feature:hover {
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #2563eb;
+  outline: none;
+}
+
+.form-group label {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  background: #fff;
+  padding: 0 5px;
+  font-size: 0.85rem;
+  color: #666;
+  transition: 0.3s;
+}
+
+body.dark .form-group input,
+body.dark .form-group textarea {
+  background: #1e1e1e;
+  border-color: #444;
+  color: #eee;
+}
+
+body.dark .form-group label {
+  background: #1e1e1e;
+  color: #bbb;
+}
+
+.submit-btn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.submit-btn:hover {
+  background: #1d4ed8;
+}
+
+body.dark .submit-btn {
+  background: #4d8aff;
+}
+
+body.dark .submit-btn:hover {
+  background: #3b6bcc;
+}
+
+.global-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.global-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.global-card:hover {
   transform: translateY(-5px);
 }
+
+.global-card h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.global-card p {
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.join-btn {
+  background: #22c55e;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.join-btn.joined {
+  background: #6b7280;
+}
+
+body.dark .global-card {
+  background: #1e1e1e;
+  color: #eee;
+}
+
+body.dark .global-card p {
+  color: #bbb;
+}
+
+body.dark .join-btn {
+  background: #22c55e;
+}
+
+body.dark .join-btn.joined {
+  background: #4b5563;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .global-tabs {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .global-form {
+    padding: 0 1rem;
+  }
+  .global-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .global-section h2 {
+    font-size: 1.8rem;
+  }
+  .submit-btn {
+    font-size: 0.9rem;
+  }
+}
+
+.global-card .actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.global-card .view-profile,
+.global-card .contact,
+.global-card .download {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.3s;
+}
+
+/* Attachments styling for global community notes (PDFs, images) */
+.attachments {
+  margin-top:10px;
+  font-size:0.96em;
+}
+.attachments img {
+  display:inline-block;
+  margin:2px;
+  border-radius:5px;
+  border: 1px solid #bbb;
+  background: #fff;
+  vertical-align:middle;
+}
+body.dark .attachments img {
+  border: 1px solid #333;
+  background: #111;
+}
+.attachments a {
+  margin-right: 10px;
+  display:inline-block;
+}
+
+.view-profile {
+  background: var(--accent);
+  color: #fff;
+}
+
+.contact {
+  background: var(--safe);
+  color: #fff;
+}
+
+.download {
+  background: #6b7280;
+  color: #fff;
+}
+
+body.dark .view-profile { background: #4d8aff; }
+body.dark .contact { background: #22c55e; }
+body.dark .download { background: #4b5563; }

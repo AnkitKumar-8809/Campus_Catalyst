@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard | CampusCatalysts</title>
+  <title>Student Dashboard | CampusCatalysts</title>
   <link rel="stylesheet" href="dashboard.css" />
 </head>
 <body>
@@ -17,10 +17,9 @@
 
   <main class="dashboard-main">
     <section class="dashboard-content">
+
       <div class="student-hero">
-        <h1>
-          Student Dashboard
-        </h1>
+        <h1>Student Dashboard</h1>
         <div class="welcome-meta">
           <span class="user-info"><strong>Welcome,</strong> <span id="userName">User</span> 👋</span>
           <span class="user-info">Email: <span id="userEmail">example@example.com</span></span>
@@ -33,7 +32,8 @@
       </div>
 
       <div class="dashboard-sections">
-        <!-- ABOUT Section -->
+
+        <!-- About -->
         <section class="section" id="aboutSection">
           <h2>About</h2>
           <div class="about-box" id="aboutDisplay"></div>
@@ -49,7 +49,7 @@
           </form>
         </section>
 
-        <!-- SKILLS Section -->
+        <!-- Skills -->
         <section class="section" id="skillsSection">
           <h2>Skills</h2>
           <form id="skillsForm" autocomplete="off">
@@ -64,7 +64,7 @@
           <ul id="skillsList" class="dashboard-list"></ul>
         </section>
 
-        <!-- PROJECTS Section -->
+        <!-- Projects -->
         <section class="section" id="projectsSection">
           <h2>Projects</h2>
           <form id="projectsForm" autocomplete="off">
@@ -83,7 +83,7 @@
           <ul id="projectsList" class="dashboard-list"></ul>
         </section>
 
-        <!-- EXPERIENCE Section -->
+        <!-- Experience -->
         <section class="section" id="experienceSection">
           <h2>Experience</h2>
           <form id="experienceForm" autocomplete="off">
@@ -105,7 +105,97 @@
           </form>
           <ul id="experienceList" class="dashboard-list"></ul>
         </section>
+
       </div>
+
+      <!-- Share To Global -->
+      <section class="share-section">
+  <h2>Share to Global Community</h2>
+
+  <div class="share-tabs">
+    <button class="share-tab-btn active" data-tab="note">Push Note</button>
+    <button class="share-tab-btn" data-tab="teammate">Looking for Teammates</button>
+    <button class="share-tab-btn" data-tab="event">Push Event</button>
+  </div>
+
+        <!-- Push Note Form -->
+        <div class="share-tab-content active" id="share-note">
+          <form id="share-note-form">
+            <div class="form-row">
+              <div class="floating-label">
+                <input type="text" id="share-note-title" placeholder=" " required>
+                <label>Note Title</label>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="floating-label">
+                <textarea id="share-note-content" placeholder=" " required></textarea>
+                <label>Content</label>
+              </div>
+            </div>
+            <div class="form-row">
+              <input type="file" id="share-note-file" accept=".pdf,image/*" multiple>
+            </div>
+            <button type="submit" class="save-btn">Push Note</button>
+          </form>
+        </div>
+
+        <!-- Teammate Form -->
+        <div class="share-tab-content" id="share-teammate">
+          <form id="share-teammate-form">
+            <div class="form-row">
+              <div class="floating-label">
+                <input type="text" id="share-teammate-project" placeholder=" " required>
+                <label>Project Name</label>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="floating-label">
+                <input type="text" id="share-teammate-skills" placeholder=" " required>
+                <label>Skills Needed</label>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="floating-label">
+                <input type="text" id="share-teammate-contact" placeholder=" " required>
+                <label>Contact Info</label>
+              </div>
+            </div>
+            <button type="submit" class="save-btn">Post</button>
+          </form>
+        </div>
+
+        <!-- Event Form -->
+        <div class="share-tab-content" id="share-event">
+          <form id="share-event-form">
+            <div class="form-row">
+              <div class="floating-label">
+                <input type="text" id="share-event-title" placeholder=" " required>
+                <label>Event Title</label>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="floating-label">
+                <input type="text" id="share-event-date" placeholder=" " required>
+                <label>Date</label>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="floating-label">
+                <input type="text" id="share-event-location" placeholder=" " required>
+                <label>Location</label>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="floating-label">
+                <textarea id="share-event-desc" placeholder=" " required></textarea>
+                <label>Description</label>
+              </div>
+            </div>
+            <button type="submit" class="save-btn">Push Event</button>
+          </form>
+        </div>
+      </section>
     </section>
   </main>
 
