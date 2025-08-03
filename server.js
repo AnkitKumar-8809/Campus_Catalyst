@@ -82,11 +82,6 @@ app.post('/contact', async (req, res) => {
   }
 });
 
-
-const User = require('./models/User');
-
-
-
 // GET user dashboard data
 app.get('/api/dashboard/:email', async (req, res) => {
   try {
