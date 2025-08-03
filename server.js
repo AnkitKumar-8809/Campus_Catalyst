@@ -82,11 +82,10 @@ app.post('/contact', async (req, res) => {
   }
 });
 
-const express = require('express');
-const User = require('./models/User');
-const bodyParser = require('body-parser');
 
-app.use(bodyParser.json());
+const User = require('./models/User');
+
+
 
 // GET user dashboard data
 app.get('/api/dashboard/:email', async (req, res) => {
