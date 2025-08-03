@@ -278,75 +278,73 @@ function logout() {
   });
 
   const userEmail = localStorage.getItem('email'); // Use session/email storage
-
 async function loadDashboard() {
   try {
     const res = await fetch(`/api/dashboard/${userEmail}`);
     const data = await res.json();
 
-    document.getElementById('about-text').innerText = data.about;
-    populateSkills(data.skills);
-    populateProjects(data.projects);
-    populateExperience(data.experience);
+    // Update the "About" section
+    document.getElementById('about-text').innerText = data.about || '';
+
+    // Update skills
+    const skillsContainer = document.getElementById('skills-container');
+    skillsContainer.innerHTML = '';
+    data.skills.forEach(skill => {
+      const div = document.createElement('div');
+      div.className = 'skill-tag';
+      div.innerText = skill;
+      skillsContainer.appendChild(div);
+    });
+
+    // Projects
+    const projContainer = document.getElementById('projects-container');
+    projContainer.innerHTML = '';
+    data.projects.forEach(project => {
+      const div = document.createElement('div');
+      div.innerHTML = `<strong>${project.name}</strong>: ${project.description}`;
+      projContainer.appendChild(div);
+    });
+
+    // Experience
+    const expContainer = document.getElementById('experience-container');
+    expContainer.innerHTML = '';
+    data.experience.forEach(exp => {
+      const div = document.createElement('div');
+      div.innerText = `${exp.role} at ${exp.company} (${exp.duration})`;
+      expContainer.appendChild(div);
+    });
+
   } catch (err) {
-    console.error('Error loading dashboard:', err);
+    console.error("Failed to load dashboard:", err);
   }
 }
+// Call on load
+window.onload = loadDashboard;
 
-function populateSkills(skills) {
-  const container = document.getElementById('skills-container');
-  container.innerHTML = '';
-  skills.forEach(skill => {
-    const div = document.createElement('div');
-    div.innerText = skill;
-    container.appendChild(div);
-  });
-}
-
-function populateProjects(projects) {
-  const container = document.getElementById('projects-container');
-  container.innerHTML = '';
-  projects.forEach(p => {
-    const div = document.createElement('div');
-    div.innerText = `${p.name}: ${p.description}`;
-    container.appendChild(div);
-  });
-}
-
-function populateExperience(expList) {
-  const container = document.getElementById('experience-container');
-  container.innerHTML = '';
-  expList.forEach(e => {
-    const div = document.createElement('div');
-    div.innerText = `${e.role} at ${e.company} (${e.duration})`;
-    container.appendChild(div);
-  });
-}
-
+// save dashboard data
 async function saveDashboard() {
   const about = document.getElementById('about-text').innerText;
 
-  // You can adjust how you extract these from your inputs
-  const skills = [...document.querySelectorAll('.skill-input')].map(el => el.value);
-  const projects = []; // Collect from project inputs
-  const experience = []; // Collect from experience inputs
+  const skills = Array.from(document.querySelectorAll('.skill-tag')).map(el => el.innerText);
+  const projects = []; // Push your project input values here
+  const experience = []; // Push experience input values
+
+  const payload = { about, skills, projects, experience };
 
   try {
     const res = await fetch(`/api/dashboard/${userEmail}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ about, skills, projects, experience })
+      body: JSON.stringify(payload)
     });
 
-    const data = await res.json();
-    alert("Dashboard saved!");
+    if (res.ok) alert("Dashboard saved!");
+    else alert("Failed to save.");
   } catch (err) {
-    console.error('Error saving dashboard:', err);
+    console.error("Save failed:", err);
   }
 }
 
-// Call on load
-window.onload = loadDashboard;
 
   // ==== Push Event ====
   document.getElementById('share-event-form').addEventListener('submit', function(e) {
