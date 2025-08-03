@@ -82,23 +82,6 @@ app.post('/contact', async (req, res) => {
   }
 });
 
-// GET user dashboard data
-app.get('/api/dashboard/:email', async (req, res) => {
-  try {
-    const user = await User.findOne({ email: req.params.email });
-    if (!user) return res.status(404).json({ message: 'User not found' });
-
-    res.json({
-      about: user.about || '',
-      skills: user.skills || [],
-      projects: user.projects || [],
-      experience: user.experience || []
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
 // POST user dashboard data
 app.post('/api/dashboard/:email', async (req, res) => {
   try {
@@ -117,6 +100,25 @@ app.post('/api/dashboard/:email', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+
+// GET user dashboard data
+app.get('/api/dashboard/:email', async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.params.email });
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    res.json({
+      about: user.about || '',
+      skills: user.skills || [],
+      projects: user.projects || [],
+      experience: user.experience || []
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 // === Start Server ===
 const PORT = 5000;
